@@ -8,19 +8,16 @@ import { useCallback } from 'react';
 import { initialEdges } from '../edges/edges';
 import { initialNodes } from '../nodes/nodes';
 
-export function useApp() {
-	const [nodes, onNodesChange] = useNodesState(initialNodes);
+export function useBase() {
+	const [nodes, , onNodesChange] = useNodesState(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-	console.log(nodes);
-	console.log(edges);
 
 	const onConnect: OnConnect = useCallback(
 		connection => {
-			setEdges(edges => addEdge(connection, edges)), console.log(connection);
+			setEdges(edges => addEdge(connection, edges));
 		},
 		[setEdges]
 	);
 
-	return { onNodesChange, onEdgesChange, onConnect };
+	return { nodes, edges, onNodesChange, onEdgesChange, onConnect };
 }

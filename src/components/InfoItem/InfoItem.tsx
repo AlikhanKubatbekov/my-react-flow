@@ -7,7 +7,7 @@ interface Props {
 
 const InfoItem: React.FC<Props> = ({ title }) => {
 	return (
-		<div className={cn('p-4 bg-blue-500 text-white')}>
+		<div className={cn('')}>
 			<p>{title}</p>
 		</div>
 	);

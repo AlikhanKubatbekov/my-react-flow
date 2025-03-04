@@ -16,10 +16,11 @@ import '@xyflow/react/dist/style.css';
 const initialNodes = [
 	{ id: 'n-1', position: { x: 0, y: 0 }, data: { label: 'Node A' } },
 	{ id: 'n-2', position: { x: 0, y: 100 }, data: { label: 'Node B' } },
+	{ id: 'n-3', position: { x: 0, y: 200 }, data: { label: 'Node C' } },
 ];
 
 const initialEdges: Edge[] = [
-	{ id: 'e-1', type: 'custom-edge', source: 'n-1', target: 'n-2' },
+	{ id: 'e-0', type: 'custom-edge', source: 'n-1', target: 'n-2' },
 ];
 
 const edgeTypes = {
@@ -31,7 +32,11 @@ const CustomEdgeFlow: React.FC = () => {
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 	const onConnect: OnConnect = useCallback(
 		connection => {
-			const edge = { ...connection, type: 'custom-edge' };
+			const edge = {
+				...connection,
+				type: 'custom-edge',
+				id: `e-${edges.length + 1}`,
+			};
 			setEdges(eds => addEdge(edge, eds));
 		},
 		[setEdges]

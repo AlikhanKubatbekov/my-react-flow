@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Base from './base/Base';
 import Page from './containers/page/Page';
+import CustomNodeFlow from './custom-node/CustomNodeFlow';
 import { cn } from './lib/utils';
+import TextNodeFlow from './text-node/TextNodeFlow';
 
-const App: React.FC = () => {
+const App = () => {
 	return (
 		<div className={cn('max-w-7xl px-10 w-full mx-auto my-5 relative')}>
 			<Link to='/' className='z-10 absolute -left-1 lg:-left-4'>
@@ -12,9 +13,12 @@ const App: React.FC = () => {
 					&larr;
 				</button>
 			</Link>
+
 			<Routes>
 				<Route path={'/'} element={<Page />} />
-				<Route path='/base' element={<Base />} />
+				<Route path={'/base'} element={<Base />} />
+				<Route path={'/custom-node'} element={<CustomNodeFlow />} />
+				<Route path={'/text-node'} element={<TextNodeFlow />} />
 
 				<Route path={'*'} element={<div>404</div>} />
 			</Routes>

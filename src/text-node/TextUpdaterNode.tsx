@@ -1,7 +1,11 @@
 import { Handle, Position } from '@xyflow/react';
 import React, { ChangeEvent, useCallback } from 'react';
 
-const TextUpdaterNode: React.FC = () => {
+type Props<NodeType extends Node = Node> = {
+	isConnectable?: boolean;
+};
+
+const TextUpdaterNode: React.FC<Props> = ({ isConnectable }) => {
 	const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		//some action
 
@@ -11,7 +15,11 @@ const TextUpdaterNode: React.FC = () => {
 	return (
 		<>
 			<div className='p-2 h-12 rounded-md bg-white'>
-				<Handle type='target' position={Position.Top} />
+				<Handle
+					type='target'
+					position={Position.Top}
+					isConnectable={isConnectable}
+				/>
 				<div>
 					<form>
 						<label htmlFor='text' className='text-gray-400 block text-left'>
@@ -36,8 +44,14 @@ const TextUpdaterNode: React.FC = () => {
 					type='source'
 					position={Position.Bottom}
 					className='left-3'
+					isConnectable={isConnectable}
 				/>
-				<Handle id='b' type='source' position={Position.Bottom} />
+				<Handle
+					id='b'
+					type='source'
+					position={Position.Bottom}
+					isConnectable={isConnectable}
+				/>
 			</div>
 		</>
 	);

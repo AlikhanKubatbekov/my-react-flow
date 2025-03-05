@@ -2,6 +2,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Base from './containers/base/Base';
 import FlowWithEdgeSelector from './containers/custom-edge/CustomEdgeFlow';
 import CustomNodeFlow from './containers/custom-node/CustomNodeFlow';
+import CustomStepEdgeFlow from './containers/custom-step-edge/CustomStepEdgeFlow';
 import Page from './containers/page/Page';
 import RandomHandleFlow from './containers/random-handle-node/RandomHandleFlow';
 import TextNodeFlow from './containers/text-node/TextNodeFlow';
@@ -23,6 +24,7 @@ const App = () => {
 				<Route path={'/text-node'} element={<TextNodeFlow />} />
 				<Route path={'/custom-edge'} element={<FlowWithEdgeSelector />} />
 				<Route path={'/random-handle-node'} element={<RandomHandleFlow />} />
+				<Route path={'/custom-step-edge'} element={<CustomStepEdgeFlow />} />
 
 				<Route path={'*'} element={<div>404</div>} />
 			</Routes>

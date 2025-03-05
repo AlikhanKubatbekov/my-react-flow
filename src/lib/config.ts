@@ -4,4 +4,5 @@ export const PAGES = [
 	{ title: 'Text Node', url: '/text-node' },
 	{ title: 'Custom Edge', url: '/custom-edge' },
 	{ title: 'Random Handle Node', url: '/random-handle-node' },
+	{ title: 'Custom Step Edge', url: '/custom-step-edge' },
 ];

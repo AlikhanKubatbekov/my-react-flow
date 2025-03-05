@@ -12,6 +12,11 @@ const TextUpdaterNode: React.FC<Props> = ({ isConnectable }) => {
 		console.log(e.target.value);
 	}, []);
 
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		console.log('submit');
+	};
+
 	return (
 		<>
 			<div className='p-2 h-12 rounded-md bg-white'>
@@ -21,7 +26,7 @@ const TextUpdaterNode: React.FC<Props> = ({ isConnectable }) => {
 					isConnectable={isConnectable}
 				/>
 				<div>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<label htmlFor='text' className='text-gray-400 block text-left'>
 							Text:
 						</label>

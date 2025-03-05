@@ -1,5 +1,3 @@
-import { initialEdges } from '@/base/edges/edges';
-import { initialNodes } from '@/base/nodes/nodes';
 import {
 	addEdge,
 	applyEdgeChanges,
@@ -11,6 +9,8 @@ import {
 	useNodesState,
 } from '@xyflow/react';
 import { useCallback } from 'react';
+import { initialEdges } from '../edges/edges';
+import { initialNodes } from '../nodes/nodes';
 
 export function useBase() {
 	const [nodes, setNodes] = useNodesState(initialNodes);

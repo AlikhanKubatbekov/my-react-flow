@@ -8,7 +8,6 @@ type Props<NodeType extends Node = Node> = {
 const TextUpdaterNode: React.FC<Props> = ({ isConnectable }) => {
 	const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		//some action
-
 		console.log(e.target.value);
 	}, []);
 
@@ -19,7 +18,7 @@ const TextUpdaterNode: React.FC<Props> = ({ isConnectable }) => {
 
 	return (
 		<>
-			<div className='p-2 h-12 rounded-md bg-white'>
+			<div className='p-2 h-12'>
 				<Handle
 					type='target'
 					position={Position.Top}

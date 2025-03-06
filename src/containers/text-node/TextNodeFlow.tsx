@@ -8,7 +8,6 @@ import {
 	MiniMap,
 	Node,
 	NodeChange,
-	NodeTypes,
 	OnConnect,
 	ReactFlow,
 } from '@xyflow/react';
@@ -43,9 +42,8 @@ const initialEdges = [
 ];
 
 const nodeTypes = {
-	// 'position-logger': PositionLoggerNode,
 	textUpdater: TextUpdaterNode,
-} satisfies NodeTypes;
+};
 
 export const edgeTypes = {} satisfies EdgeTypes;
 

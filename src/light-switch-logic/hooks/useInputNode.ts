@@ -1,9 +1,9 @@
-import { IInputNodeData } from '@/types';
+import { InputNodeData } from '@/types';
 import { useReactFlow } from '@xyflow/react';
 
 interface Props {
-	id: IInputNodeData['id'];
-	data: IInputNodeData['data'];
+	id: InputNodeData['id'];
+	data: InputNodeData['data'];
 	value: number;
 	setValue: (value: React.SetStateAction<number>) => void;
 }

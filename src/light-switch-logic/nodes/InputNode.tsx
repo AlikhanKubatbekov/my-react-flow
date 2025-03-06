@@ -2,10 +2,10 @@ import { Handle, NodeProps, Position } from '@xyflow/react';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import Typography from '@/components/ui/Typography';
-import { IInputNodeData } from '@/types';
+import { InputNodeData } from '@/types';
 import { useInputNode } from '../hooks/useInputNode';
 
-const InputNode: React.FC<NodeProps<IInputNodeData>> = ({
+const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 	id,
 	data,
 	selected,

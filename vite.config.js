@@ -2,11 +2,13 @@ import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-	plugins: [react()],
+	plugins: [react(), tsconfigPaths(), svgr()],
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),

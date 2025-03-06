@@ -11,24 +11,38 @@ import {
 	OnEdgesChange,
 	OnNodesChange,
 	ReactFlow,
+	ReactFlowInstance,
 	ReactFlowProvider,
 	useEdgesState,
 	useNodesState,
 } from '@xyflow/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { evaluateCircuit } from './helpers/evaluateCircuit';
+import GateNode from './nodes/GateNode';
 import InputNode from './nodes/InputNode';
 import OutputNode from './nodes/OutputNode';
 
 const nodeTypes = {
 	inputNode: InputNode,
 	outputNode: OutputNode,
+	gateNode: GateNode,
 };
 
 const LightSwitchFlow: React.FC = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
+	const [isFitViewDone, setIsFitViewDone] = useState(false);
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+	const onInit = useCallback(
+		(instance: ReactFlowInstance) => {
+			if (!isFitViewDone) {
+				instance.fitView({ padding: 0.1 });
+				setIsFitViewDone(true);
+			}
+		},
+		[isFitViewDone]
+	);
 
 	const topologicalSort = useCallback(
 		(nodes: Node[], edges: Edge[]): Node[] => {
@@ -132,7 +146,7 @@ const LightSwitchFlow: React.FC = () => {
 					onNodesChange={onNodesChangeHandler}
 					onEdgesChange={onEdgesChangeHandler}
 					onConnect={onConnect}
-					// onInit={onInit}
+					onInit={onInit}
 					// onNodeClick={onNodeClick}
 					// onPaneClick={onPaneClick}
 					nodeTypes={nodeTypes}

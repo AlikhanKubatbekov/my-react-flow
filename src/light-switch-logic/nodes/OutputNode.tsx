@@ -1,3 +1,5 @@
+import { ReactComponent as LightBulbOff } from '@/assets/icons/light-bulb-off.svg';
+import { ReactComponent as LightBulbOn } from '@/assets/icons/light-bulb-on.svg';
 import Typography from '@/components/ui/Typography';
 import { Handle, NodeProps, Position } from '@xyflow/react';
 import React, { ReactNode } from 'react';
@@ -15,11 +17,11 @@ const OutputNode: React.FC<NodeProps> = ({ data, selected }) => {
 		>
 			<Handle id='a' type='target' position={Position.Left} />
 			<div className='flex items-center space-x-2'>
-				{/* {isOn ? (
+				{isOn ? (
 					<LightBulbOn className='w-10 h-10 text-yellow-500' />
 				) : (
 					<LightBulbOff className='w-10 h-10 text-gray-500' />
-				)} */}
+				)}
 				<Typography variant='body2'>{data.label as ReactNode}</Typography>
 				<Typography
 					variant='body2'

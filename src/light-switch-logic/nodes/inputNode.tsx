@@ -34,9 +34,7 @@ const InputNode: React.FC<NodeProps<IInputNodeData>> = ({
 			<Typography
 				variant='body2'
 				className={`${
-					data.value
-						? 'text-green-500 dark:text-green-500'
-						: 'text-red-500 dark:text-red-500'
+					data.value ? 'text-green-500' : 'text-red-500'
 				} p-1 px-2 bg-black rounded-md`}
 			>
 				{data.value as ReactNode}

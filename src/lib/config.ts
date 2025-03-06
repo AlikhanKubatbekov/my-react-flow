@@ -5,4 +5,5 @@ export const PAGES = [
 	{ title: 'Custom Edge', url: '/custom-edge' },
 	{ title: 'Random Handle Node', url: '/random-handle-node' },
 	{ title: 'Custom Step Edge', url: '/custom-step-edge' },
+	{ title: 'Light Switch', url: '/light-switch' },
 ];

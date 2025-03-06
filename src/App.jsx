@@ -7,6 +7,7 @@ import Page from './containers/page/Page';
 import RandomHandleFlow from './containers/random-handle-node/RandomHandleFlow';
 import TextNodeFlow from './containers/text-node/TextNodeFlow';
 import { cn } from './lib/utils';
+import LightSwitchFlow from './light-switch-logic/LightSwitchFlow';
 
 const App = () => {
 	return (
@@ -25,6 +26,7 @@ const App = () => {
 				<Route path={'/custom-edge'} element={<FlowWithEdgeSelector />} />
 				<Route path={'/random-handle-node'} element={<RandomHandleFlow />} />
 				<Route path={'/custom-step-edge'} element={<CustomStepEdgeFlow />} />
+				<Route path={'light-switch'} element={<LightSwitchFlow />} />
 
 				<Route path={'*'} element={<div>404</div>} />
 			</Routes>

@@ -7,13 +7,13 @@ import {
 	calculateXNOR,
 	calculateXOR,
 } from './gateLogic';
-import { topologicalSort } from './topologicalSort';
 
 interface Props {
 	nodesCopy: Node[];
 	edgesCopy: Edge[];
 	setNodes: (value: React.SetStateAction<Node<any>[]>) => void;
 	setEdges: (value: React.SetStateAction<Edge<any>[]>) => void;
+	topologicalSort: (nodes: Node[], edges: Edge[]) => Node[];
 }
 
 export function evaluateCircuit({
@@ -21,6 +21,7 @@ export function evaluateCircuit({
 	edgesCopy,
 	setNodes,
 	setEdges,
+	topologicalSort,
 }: Props) {
 	const connectedNodes = new Set<string>();
 	edgesCopy.forEach(edge => {

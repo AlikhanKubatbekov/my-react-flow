@@ -5,7 +5,6 @@ import {
 	Connection,
 	Controls,
 	Edge,
-	MiniMap,
 	Node,
 	OnConnect,
 	OnEdgesChange,
@@ -16,8 +15,10 @@ import {
 	useEdgesState,
 	useNodesState,
 } from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
 import React, { useCallback, useEffect, useState } from 'react';
 import { evaluateCircuit } from './helpers/evaluateCircuit';
+import './light-switch.css';
 import GateNode from './nodes/GateNode';
 import InputNode from './nodes/InputNode';
 import OutputNode from './nodes/OutputNode';
@@ -31,6 +32,7 @@ const nodeTypes = {
 const LightSwitchFlow: React.FC = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
+	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 	const [isFitViewDone, setIsFitViewDone] = useState(false);
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -127,6 +129,14 @@ const LightSwitchFlow: React.FC = () => {
 		});
 	};
 
+	const onNodeClick = useCallback((_: any, node: Node) => {
+		setSelectedNode(node);
+	}, []);
+
+	const onPaneClick = useCallback(() => {
+		setSelectedNode(null);
+	}, []);
+
 	useEffect(() => {
 		evaluateCircuit({
 			nodesCopy: [...nodes],
@@ -138,22 +148,23 @@ const LightSwitchFlow: React.FC = () => {
 	}, []);
 
 	return (
-		<div style={{ width: '100%', height: '100vh' }}>
+		<div className='w-full h-screen'>
 			<ReactFlowProvider>
 				<ReactFlow
+					fitView
 					nodes={nodes}
 					edges={edges}
 					onNodesChange={onNodesChangeHandler}
 					onEdgesChange={onEdgesChangeHandler}
 					onConnect={onConnect}
 					onInit={onInit}
-					// onNodeClick={onNodeClick}
-					// onPaneClick={onPaneClick}
+					onNodeClick={onNodeClick}
+					onPaneClick={onPaneClick}
 					nodeTypes={nodeTypes}
+					className={'bg-dark-gray'}
 				>
-					<MiniMap className='bg-white border rounded w-40 h-28' />
 					<Controls className='bg-white border rounded' />
-					<Background color='#aaa' gap={16} />
+					<Background gap={16} />
 				</ReactFlow>
 			</ReactFlowProvider>
 		</div>

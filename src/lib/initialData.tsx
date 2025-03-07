@@ -1,34 +1,54 @@
 import { Edge, Node, Position } from '@xyflow/react';
+import { resetNodeStyles } from './utils';
 
 export const initialNodes: Node[] = [
 	{
 		id: '1',
 		type: 'inputNode',
-		data: { label: 'Input', value: 0, isDynamic: true },
+		data: {
+			label: 'Input',
+			value: 0,
+			isDynamic: true,
+		},
 		position: { x: 250, y: 5 },
 		sourcePosition: Position.Right,
+		style: resetNodeStyles(),
 	},
 	{
 		id: '2',
 		type: 'inputNode',
-		data: { label: 'Input', value: 0, isDynamic: true },
+		data: {
+			label: 'Input',
+			value: 0,
+			isDynamic: true,
+		},
 		position: { x: 250, y: 100 },
 		sourcePosition: Position.Right,
+		style: resetNodeStyles(),
 	},
 	{
 		id: '3',
 		type: 'gateNode',
-		data: { gateType: 'and', value: 0, label: 'AND Gate' },
+		data: {
+			gateType: 'and',
+			value: 0,
+			label: 'AND Gate',
+		},
 		position: { x: 440, y: 50 },
 		targetPosition: Position.Left,
 		sourcePosition: Position.Right,
+		style: resetNodeStyles(),
 	},
 	{
 		id: '4',
 		type: 'outputNode',
-		data: { label: 'Lamp', value: 0 },
+		data: {
+			label: 'Lamp',
+			value: 0,
+		},
 		position: { x: 600, y: 50 },
 		targetPosition: Position.Left,
+		style: resetNodeStyles(),
 	},
 ];
 

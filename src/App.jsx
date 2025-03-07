@@ -11,7 +11,7 @@ import LightSwitchFlow from './light-switch-logic/LightSwitchFlow';
 
 const App = () => {
 	return (
-		<div className={cn('max-w-7xl px-10 w-full mx-auto my-5 relative')}>
+		<div className={cn('max-w-[1400px] px-10 w-full mx-auto my-5 relative')}>
 			<Link to='/' className='z-10 absolute -left-1 lg:-left-4'>
 				<button className='flex items-center justify-center w-10 h-10 border rounded-full border-slate-300 hover:border-slate-600 transition-all'>
 					&larr;

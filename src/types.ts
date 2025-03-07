@@ -5,3 +5,8 @@ export interface InputNodeData extends Node<Record<string, unknown>, string> {
 	value?: number;
 	isDynamic?: boolean;
 }
+
+export interface GateNodeData extends Node<Record<string, unknown>, string> {
+	gateType: string;
+	value?: number;
+}

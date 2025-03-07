@@ -1,39 +1,11 @@
-import { ReactComponent as LogicGateAnd } from '@/assets/icons/logic-gate-and.svg';
-import { ReactComponent as LogicGateNand } from '@/assets/icons/logic-gate-nand.svg';
-import { ReactComponent as LogicGateNor } from '@/assets/icons/logic-gate-nor.svg';
-import { ReactComponent as LogicGateNot } from '@/assets/icons/logic-gate-not.svg';
-import { ReactComponent as LogicGateOr } from '@/assets/icons/logic-gate-or.svg';
-import { ReactComponent as LogicGateXnor } from '@/assets/icons/logic-gate-xnor.svg';
-import { ReactComponent as LogicGateXor } from '@/assets/icons/logic-gate-xor.svg';
-import { Handle, Node, NodeProps, Position } from '@xyflow/react';
+import { GateNodeData } from '@/types';
+import { Handle, NodeProps, Position } from '@xyflow/react';
 import React from 'react';
-
-interface GateNodeData extends Node<Record<string, unknown>, string> {
-	gateType: string;
-	value?: number;
-}
+import { renderGateIcon } from '../helpers/renderGateIcon';
 
 const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
-	const renderIcon = () => {
-		switch (data.gateType) {
-			case 'and':
-				return <LogicGateAnd className='w-8 h-8' />;
-			case 'or':
-				return <LogicGateOr className='w-8 h-8' />;
-			case 'not':
-				return <LogicGateNot className='w-8 h-8' />;
-			case 'nand':
-				return <LogicGateNand className='w-8 h-8' />;
-			case 'nor':
-				return <LogicGateNor className='w-8 h-8' />;
-			case 'xor':
-				return <LogicGateXor className='w-8 h-8' />;
-			case 'xnor':
-				return <LogicGateXnor className='w-8 h-8' />;
-			default:
-				return null;
-		}
-	};
+	const icon = renderGateIcon({ data: { gateType: data.gateType as string } });
+	const gateType = data.gateType as string;
 
 	return (
 		<div
@@ -66,8 +38,8 @@ const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 				/>
 			)}
 			<div className='flex items-center space-x-2 text-black'>
-				{renderIcon()}
-				<span>{data.gateType.toUpperCase()} Gate</span>
+				{icon}
+				<span>{gateType.toUpperCase()} Gate</span>
 			</div>
 			<Handle
 				type='source'

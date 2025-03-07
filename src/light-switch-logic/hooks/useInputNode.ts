@@ -23,7 +23,6 @@ export function useInputNode({ id, data, setValue, value }: Props) {
 				return node;
 			})
 		);
-		console.log('propagated value', newValue);
 	};
 
 	const toggleSwitch = () => {

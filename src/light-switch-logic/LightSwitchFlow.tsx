@@ -1,3 +1,6 @@
+import { ReactComponent as Close } from '@/assets/icons/close.svg';
+import Button from '@/components/ui/Button';
+import Typography from '@/components/ui/Typography';
 import { initialEdges, initialNodes } from '@/lib/initialData';
 import {
 	addEdge,
@@ -14,9 +17,11 @@ import {
 	ReactFlowProvider,
 	useEdgesState,
 	useNodesState,
+	useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Drawer from './components/Drawer/Drawer';
 import { evaluateCircuit } from './helpers/evaluateCircuit';
 import './light-switch.css';
 import GateNode from './nodes/GateNode';
@@ -34,7 +39,57 @@ const LightSwitchFlow: React.FC = () => {
 	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
 	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 	const [isFitViewDone, setIsFitViewDone] = useState(false);
+	const [isDrawerOpen, setDrawerOpen] = useState(false);
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
+	const reactFlowInstance = useReactFlow();
+	const reactFlowWrapper = useRef<HTMLDivElement>(null);
+
+	const addNode = useCallback(
+		(nodeType: string, gateType: string = '') => {
+			let label;
+			let value;
+			let isDynamic = true;
+
+			if (nodeType === 'inputNode') {
+				if (gateType === 'high') {
+					label = 'High (1)';
+					value = 1;
+					isDynamic = false;
+				} else if (gateType === 'low') {
+					label = 'Low (0)';
+					value = 0;
+					isDynamic = false;
+				} else {
+					label = 'Input';
+					value = 0;
+				}
+			} else if (nodeType === 'outputNode') {
+				label = 'Lamp';
+				value = 0;
+			} else {
+				label = gateType ? `${gateType.toUpperCase()} Gate` : '';
+			}
+
+			const centerX = window.innerWidth / 4;
+			const centerY = window.innerHeight / 4;
+			const position = reactFlowInstance?.screenToFlowPosition({
+				x: centerX,
+				y: centerY,
+			}) || { x: centerX, y: centerY };
+
+			const newNode: Node = {
+				id: `${nodeType}-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+				type: nodeType,
+				data: { gateType, value, label, isDynamic },
+				position,
+				draggable: true,
+			};
+
+			setNodes(nds => nds.concat(newNode));
+			setDrawerOpen(false);
+		},
+		[reactFlowInstance, setNodes, setDrawerOpen]
+	);
 
 	const onInit = useCallback(
 		(instance: ReactFlowInstance) => {
@@ -79,18 +134,13 @@ const LightSwitchFlow: React.FC = () => {
 						!(
 							edge.target === params.target &&
 							edge.targetHandle === params.targetHandle
-						) &&
-						!(
-							edge.source === params.source &&
-							edge.sourceHandle === params.sourceHandle
 						)
 				);
-
 				const newEdges = addEdge(params, updatedEdges);
 
 				evaluateCircuit({
 					nodesCopy: [...nodes],
-					edgesCopy: [...edges],
+					edgesCopy: [...newEdges],
 					setNodes,
 					setEdges,
 					topologicalSort,
@@ -98,7 +148,7 @@ const LightSwitchFlow: React.FC = () => {
 				return newEdges;
 			});
 		},
-		[nodes, evaluateCircuit]
+		[nodes, setEdges, evaluateCircuit, topologicalSort]
 	);
 
 	const onNodesChangeHandler: OnNodesChange = changes => {
@@ -148,8 +198,27 @@ const LightSwitchFlow: React.FC = () => {
 	}, []);
 
 	return (
-		<div className='w-full h-screen'>
-			<ReactFlowProvider>
+		<div className='flex h-[calc(100vh-175px)] relative'>
+			<div className='md:hidden absolute top-4 left-4 z-10 rounded-lg'>
+				<Button
+					variant='contained'
+					className='px-2'
+					onClick={() => setDrawerOpen(true)}
+				>
+					<Typography variant='body2' className='text-white text-nowrap'>
+						Add Elements
+					</Typography>
+					<Close className='rotate-45 w-6 h-6' />
+				</Button>
+			</div>
+
+			<Drawer
+				isOpen={isDrawerOpen}
+				onClose={() => setDrawerOpen(false)}
+				addNode={addNode}
+			/>
+
+			<div className='flex-grow' ref={reactFlowWrapper}>
 				<ReactFlow
 					fitView
 					nodes={nodes}
@@ -157,18 +226,24 @@ const LightSwitchFlow: React.FC = () => {
 					onNodesChange={onNodesChangeHandler}
 					onEdgesChange={onEdgesChangeHandler}
 					onConnect={onConnect}
+					nodeTypes={nodeTypes}
+					className='bg-dark-gray'
 					onInit={onInit}
 					onNodeClick={onNodeClick}
 					onPaneClick={onPaneClick}
-					nodeTypes={nodeTypes}
-					className={'bg-dark-gray'}
 				>
 					<Controls className='bg-white border rounded' />
 					<Background gap={16} />
 				</ReactFlow>
-			</ReactFlowProvider>
+			</div>
 		</div>
 	);
 };
 
-export default LightSwitchFlow;
+const LightSwitchFlowWithProvider: React.FC = () => (
+	<ReactFlowProvider>
+		<LightSwitchFlow />
+	</ReactFlowProvider>
+);
+
+export default LightSwitchFlowWithProvider;

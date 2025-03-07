@@ -2,6 +2,7 @@ import { GateNodeData } from '@/types';
 import { Handle, NodeProps, Position } from '@xyflow/react';
 import React from 'react';
 import { renderGateIcon } from '../helpers/renderGateIcon';
+import './node.css';
 
 const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 	const icon = renderGateIcon({ data: { gateType: data.gateType as string } });
@@ -9,8 +10,8 @@ const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 
 	return (
 		<div
-			className={`bg-white p-2 border rounded shadow ${
-				selected ? 'border-primary-red hover:border-primary-red/50' : ''
+			className={`bg-white p-2 border rounded ${
+				selected ? 'border-red-400 hover:border-red-400-red/50' : ''
 			}`}
 		>
 			{data.gateType !== 'not' && (

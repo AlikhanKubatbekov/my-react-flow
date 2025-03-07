@@ -21,11 +21,13 @@ const Switch: React.FC<Props> = forwardRef((props, _) => {
 				className={cn(
 					`w-11 h-6 bg-inherit peer-focus:outline-none peer-focus:ring-0 peer-checked:border-0 border rounded-full peer ltr:peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-0 after:content-[''] after:absolute ${
 						children ? 'after:top-[5px]' : 'after:top-[2px]'
-					} ltr:after:left-[2px] ltr:after:right-unset after:border-0 after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-white peer-checked:bg-customRed border-custom-red`,
+					} ltr:after:left-[2px] ltr:after:right-unset after:border-0 after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-white peer-checked:bg-custom-red border-custom-red`,
 					className
 				)}
 			/>
-			<span className={cn(`ltr:ml-3 rtl:mr-3 text-white`, labelClassName)}>
+			<span
+				className={cn(`ltr:ml-3 text-sm rtl:mr-3 text-white`, labelClassName)}
+			>
 				{children}
 			</span>
 		</label>

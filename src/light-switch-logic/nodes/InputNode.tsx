@@ -5,6 +5,7 @@ import Typography from '@/components/ui/Typography';
 import { InputNodeData } from '@/types';
 import Switch from '../components/Switch/Switch';
 import { useInputNode } from '../hooks/useInputNode';
+import './node.css';
 
 const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 	id,
@@ -25,10 +26,8 @@ const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 
 	return (
 		<div
-			className={`p-2 bg-dark border rounded shadow border-white ${
-				selected
-					? 'border-red-500 hover:border-custom-red-red/50'
-					: 'border-black'
+			className={`p-2 bg-dark border rounded border-white ${
+				selected ? 'border-red-600 hover:border-red-500-red/50' : 'border-black'
 			} transition-all`}
 		>
 			<Handle id='a' type='source' position={Position.Right} />

@@ -30,7 +30,6 @@ export function evaluateCircuit({
 	});
 	const validNodes = nodesCopy.filter(node => connectedNodes.has(node.id));
 
-	// Perform topological sort to ensure proper evaluation order of nodes
 	const sortedNodes = topologicalSort(validNodes, edgesCopy);
 
 	sortedNodes.forEach(node => {
@@ -76,7 +75,6 @@ export function evaluateCircuit({
 			node.data = { ...node.data, value: outputValue };
 		}
 
-		// Update output node values
 		if (node.type === 'outputNode') {
 			const inputEdge = edgesCopy.find(edge => edge.target === node.id);
 			if (inputEdge) {

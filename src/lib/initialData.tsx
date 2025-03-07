@@ -1,5 +1,4 @@
 import { Edge, Node, Position } from '@xyflow/react';
-import { resetNodeStyles } from './utils';
 
 export const initialNodes: Node[] = [
 	{
@@ -12,7 +11,6 @@ export const initialNodes: Node[] = [
 		},
 		position: { x: 250, y: 5 },
 		sourcePosition: Position.Right,
-		style: resetNodeStyles(),
 	},
 	{
 		id: '2',
@@ -24,7 +22,6 @@ export const initialNodes: Node[] = [
 		},
 		position: { x: 250, y: 100 },
 		sourcePosition: Position.Right,
-		style: resetNodeStyles(),
 	},
 	{
 		id: '3',
@@ -37,7 +34,6 @@ export const initialNodes: Node[] = [
 		position: { x: 440, y: 50 },
 		targetPosition: Position.Left,
 		sourcePosition: Position.Right,
-		style: resetNodeStyles(),
 	},
 	{
 		id: '4',
@@ -48,7 +44,6 @@ export const initialNodes: Node[] = [
 		},
 		position: { x: 600, y: 50 },
 		targetPosition: Position.Left,
-		style: resetNodeStyles(),
 	},
 ];
 

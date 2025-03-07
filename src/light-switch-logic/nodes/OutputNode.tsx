@@ -3,6 +3,7 @@ import { ReactComponent as LightBulbOn } from '@/assets/icons/light-bulb-on.svg'
 import Typography from '@/components/ui/Typography';
 import { Handle, NodeProps, Position } from '@xyflow/react';
 import React, { ReactNode } from 'react';
+import './node.css';
 
 const OutputNode: React.FC<NodeProps> = ({ data, selected }) => {
 	const isOn = data.value === 1;

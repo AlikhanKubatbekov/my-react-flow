@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+	--color-dark: #1a1f37;
+	--color-dark-gray: #6c737f;
+	--color-custom-red: #f55151;
+}
 
 body {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

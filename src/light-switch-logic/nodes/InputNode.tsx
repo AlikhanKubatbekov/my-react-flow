@@ -1,11 +1,12 @@
-import { Handle, NodeProps, Position } from '@xyflow/react';
+import { NodeProps, Position } from '@xyflow/react';
 import React, { memo, ReactNode, useEffect, useState } from 'react';
 
 import Typography from '@/components/ui/Typography';
 import { InputNodeData } from '@/types';
+import { CustomHandle } from '../components/CustomHandle/CustomHandle';
+import { CustomNode } from '../components/CustomNode/CustomNode';
 import Switch from '../components/Switch/Switch';
 import { useInputNode } from '../hooks/useInputNode';
-import './node.css';
 
 const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 	id,
@@ -25,12 +26,8 @@ const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 	}, []);
 
 	return (
-		<div
-			className={`p-2 bg-dark border rounded border-white ${
-				selected ? 'border-red-600 hover:border-red-500-red/50' : 'border-black'
-			} transition-all`}
-		>
-			<Handle id='a' type='source' position={Position.Right} />
+		<CustomNode id={id} data={data} selected={selected} className='!bg-dark'>
+			<CustomHandle id='a' type='source' position={Position.Right} />
 
 			<div className='flex items-center gap-2 text-white'>
 				{data.isDynamic ? (
@@ -45,12 +42,12 @@ const InputNode: React.FC<NodeProps<InputNodeData>> = ({
 					variant='body2'
 					className={`${
 						data.value ? 'text-green-500' : 'text-red-500'
-					} p-1 px-2 text-center w-6 bg-white rounded-md`}
+					} p-1 px-2 text-center w-6 bg-white rounded-md transition-all`}
 				>
 					{data.value as ReactNode}
 				</Typography>
 			</div>
-		</div>
+		</CustomNode>
 	);
 };
 

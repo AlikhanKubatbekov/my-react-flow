@@ -1,28 +1,30 @@
 import { GateNodeData } from '@/types';
-import { Handle, NodeProps, Position } from '@xyflow/react';
+import { NodeProps, Position } from '@xyflow/react';
 import React from 'react';
+import { CustomHandle } from '../components/CustomHandle/CustomHandle';
+import { CustomNode } from '../components/CustomNode/CustomNode';
 import { renderGateIcon } from '../helpers/renderGateIcon';
-import './node.css';
 
 const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 	const icon = renderGateIcon({ data: { gateType: data.gateType as string } });
 	const gateType = data.gateType as string;
 
 	return (
-		<div
-			className={`bg-white p-2 border rounded ${
-				selected ? 'border-red-400 hover:border-red-400-red/50' : ''
-			}`}
+		<CustomNode
+			id={data.id as string}
+			className='!bg-white'
+			data={data}
+			selected={selected}
 		>
 			{data.gateType !== 'not' && (
 				<>
-					<Handle
+					<CustomHandle
 						type='target'
 						position={Position.Left}
 						id='input1'
 						style={{ top: '30%' }}
 					/>
-					<Handle
+					<CustomHandle
 						type='target'
 						position={Position.Left}
 						id='input2'
@@ -31,7 +33,7 @@ const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 				</>
 			)}
 			{data.gateType === 'not' && (
-				<Handle
+				<CustomHandle
 					type='target'
 					position={Position.Left}
 					id='input'
@@ -42,13 +44,13 @@ const GateNode: React.FC<NodeProps<GateNodeData>> = ({ data, selected }) => {
 				{icon}
 				<span>{gateType.toUpperCase()} Gate</span>
 			</div>
-			<Handle
+			<CustomHandle
 				type='source'
 				position={Position.Right}
 				id='output'
 				style={{ top: '50%' }}
 			/>
-		</div>
+		</CustomNode>
 	);
 };
 

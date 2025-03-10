@@ -33,13 +33,21 @@ const Button: React.FC<IProps> = props => {
 			case 'contained':
 				return `border-none ${
 					isPrimaryColor
-						? `${bgMode === 'default' ? `bg-custom-red ` : `bg-gradient-red`}`
+						? `${
+								bgMode === 'default'
+									? `bg-custom-red `
+									: `bg-gradient-to-r from-[rgb(245,60,43)] to-[rgb(245,60,43)]`
+						  }`
 						: ''
 				}`;
 			default:
 				return `border-none ${
 					isPrimaryColor
-						? `${bgMode === 'default' ? 'bg-custom-red' : 'bg-gradient-red'}`
+						? `${
+								bgMode === 'default'
+									? 'bg-custom-red'
+									: 'bg-gradient-to-r from-[rgb(245,60,43)] to-[rgb(245,60,43)]'
+						  }`
 						: ''
 				}`;
 		}

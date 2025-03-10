@@ -1,22 +1,22 @@
 import { ReactComponent as LightBulbOff } from '@/assets/icons/light-bulb-off.svg';
 import { ReactComponent as LightBulbOn } from '@/assets/icons/light-bulb-on.svg';
 import Typography from '@/components/ui/Typography';
-import { Handle, NodeProps, Position } from '@xyflow/react';
+import { NodeProps, Position } from '@xyflow/react';
 import React, { ReactNode } from 'react';
-import './node.css';
+import { CustomHandle } from '../components/CustomHandle/CustomHandle';
+import { CustomNode } from '../components/CustomNode/CustomNode';
 
 const OutputNode: React.FC<NodeProps> = ({ data, selected }) => {
 	const isOn = data.value === 1;
 
 	return (
-		<div
-			className={`p-2 bg-dark border rounded shadow ${
-				selected
-					? 'border-custom-red hover:border-custom-red-red/50'
-					: 'border-white'
-			}`}
+		<CustomNode
+			id={data.id as string}
+			data={data}
+			selected={selected}
+			className='!bg-dark'
 		>
-			<Handle id='a' type='target' position={Position.Left} />
+			<CustomHandle id='a' type='target' position={Position.Left} />
 			<div className='flex items-center space-x-2 text-white'>
 				{isOn ? (
 					<LightBulbOn className='w-10 h-10 text-yellow-500' />
@@ -35,7 +35,7 @@ const OutputNode: React.FC<NodeProps> = ({ data, selected }) => {
 					{data.value as ReactNode}
 				</Typography>
 			</div>
-		</div>
+		</CustomNode>
 	);
 };
 

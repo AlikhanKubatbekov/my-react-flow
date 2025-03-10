@@ -9,7 +9,7 @@ export const initialNodes: Node[] = [
 			value: 0,
 			isDynamic: true,
 		},
-		position: { x: 250, y: 5 },
+		position: { x: 300, y: 5 },
 		sourcePosition: Position.Right,
 	},
 	{
@@ -20,7 +20,7 @@ export const initialNodes: Node[] = [
 			value: 0,
 			isDynamic: true,
 		},
-		position: { x: 250, y: 100 },
+		position: { x: 300, y: 100 },
 		sourcePosition: Position.Right,
 	},
 	{
@@ -31,7 +31,7 @@ export const initialNodes: Node[] = [
 			value: 0,
 			label: 'AND Gate',
 		},
-		position: { x: 440, y: 50 },
+		position: { x: 450, y: 50 },
 		targetPosition: Position.Left,
 		sourcePosition: Position.Right,
 	},

@@ -19,11 +19,10 @@ import {
 	useNodesState,
 	useReactFlow,
 } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
+import '@xyflow/react/dist/base.css';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Drawer from './components/Drawer/Drawer';
 import { evaluateCircuit } from './helpers/evaluateCircuit';
-import './light-switch.css';
 import GateNode from './nodes/GateNode';
 import InputNode from './nodes/InputNode';
 import OutputNode from './nodes/OutputNode';
@@ -70,8 +69,8 @@ const LightSwitchFlow: React.FC = () => {
 				label = gateType ? `${gateType.toUpperCase()} Gate` : '';
 			}
 
-			const centerX = window.innerWidth / 4;
-			const centerY = window.innerHeight / 4;
+			const centerX = window.innerWidth / 4 + 250;
+			const centerY = window.innerHeight / 4 - 100;
 			const position = reactFlowInstance?.screenToFlowPosition({
 				x: centerX,
 				y: centerY,
@@ -218,7 +217,7 @@ const LightSwitchFlow: React.FC = () => {
 				addNode={addNode}
 			/>
 
-			<div className='flex-grow' ref={reactFlowWrapper}>
+			<div className='!grow' ref={reactFlowWrapper}>
 				<ReactFlow
 					fitView
 					nodes={nodes}
@@ -227,12 +226,12 @@ const LightSwitchFlow: React.FC = () => {
 					onEdgesChange={onEdgesChangeHandler}
 					onConnect={onConnect}
 					nodeTypes={nodeTypes}
-					className='bg-dark-gray'
+					className='!bg-dark-gray'
 					onInit={onInit}
 					onNodeClick={onNodeClick}
 					onPaneClick={onPaneClick}
 				>
-					<Controls className='bg-white border rounded' />
+					<Controls className='!bg-white !border !rounded' />
 					<Background gap={16} />
 				</ReactFlow>
 			</div>
